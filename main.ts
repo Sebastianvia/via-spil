@@ -6,11 +6,12 @@ namespace SpriteKind {
 }
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (mySprite.isHittingTile(CollisionDirection.Bottom)) {
-        mySprite.vy = -100
+        mySprite.vy = -150
     }
 })
 info.onCountdownEnd(function () {
-    sprites.destroy(mySprite)
+    sprites.destroy(mySprite, effects.spray, 500)
+    game.gameOver(false)
 })
 let mySprite: Sprite = null
 scene.setBackgroundColor(1)
@@ -35,7 +36,27 @@ mySprite = sprites.create(img`
     `, SpriteKind.Player)
 controller.moveSprite(mySprite, 100, 0)
 mySprite.setStayInScreen(false)
-mySprite.ay = 200
-mySprite.setPosition(149, 111)
+mySprite.ay = 300
+mySprite.setPosition(380, 600)
 info.startCountdown(100)
 scene.cameraFollowSprite(mySprite)
+let mySprite2 = sprites.create(img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . 3 3 3 3 3 . . . 
+    . . . . . . . 3 . . . 3 3 3 . . 
+    . . . . . 3 3 3 . 3 3 3 3 3 . . 
+    . . . . 3 . 3 3 3 3 3 3 3 3 . . 
+    . . . 3 . 3 3 3 3 3 3 . . 3 . . 
+    . . . 3 3 3 3 3 3 3 3 . 3 3 . . 
+    3 3 3 3 3 3 3 3 . 3 3 . 3 3 . . 
+    3 . . 3 3 3 3 3 3 3 3 . 3 3 . . 
+    3 . . 3 3 3 3 3 3 . 3 3 . 3 . . 
+    3 . 3 3 3 3 3 3 3 3 3 3 3 . . . 
+    3 3 3 3 3 3 3 3 3 3 3 . 3 . . . 
+    . 3 3 3 3 3 . 3 3 3 3 3 . . . . 
+    . . 3 . . . 3 . 3 3 3 3 . . . . 
+    . . 3 . . . . . . . . . . . . . 
+    . 3 . . . . . . . . . . . . . . 
+    `, SpriteKind.Enemy)
+mySprite2.setPosition(395, 600)
+mySprite2.follow(mySprite, 50)
